@@ -9,10 +9,11 @@
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>practice14</artifactId>
+    <artifactId>CoffeeWorld</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>practice14</name>
-    <description>Project for Spring Boot</description>
+    <name>CoffeeWorld</name>
+    <description>CoffeeWorldProject</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
