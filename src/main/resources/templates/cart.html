@@ -9,11 +9,26 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <div class="container">
+    <h3 style="font-weight: 800" class="text-center my-2">Укажите параметры для заказа</h3>
+    <div class="col">
+        <form method="post"  class="pt-2 pd-2" th:action="@{/cardFood/setParametersOrder}">
+            <div class="mt-1 mb-1">
+                <input type="checkbox" id="isPickup" name="isPickup" class="form-check-input insert__form__input">
+                <label for="isPickup" class="form-check-label">Самовывоз</label>
+            </div>
+            <input type="text" class="form-control mt-1 md-1" required="true" name="addressOrder" placeholder="Укажите адрес доставки или адрес кофейни">
+            <input type="text" class="form-control mt-1 md-1" required="true" name="timeOrder" placeholder="Укажите время для доставки или время, когда вы заберете заказ">
+            <button type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="mt-1 md-1 insert__form__button">Выбрать</button>
+        </form>
+        </div>
     <h3 style="font-weight: 800" class="text-center my-2">Заказ</h3>
     <div class="col">
         <div class="card my-2" style="background-color: #ebd4d4; color: #261414">
             <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${messageForReal}"></span>
             <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${messageTotalCost}"></span>
+            <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${pickup}"></span>
+            <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${address}"></span>
+            <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${time}"></span>
             <div style="padding-right: 7px; padding-left: 7px; margin-top: 10px;">
                 <form method="post" style="margin-bottom: 7px" th:if="${flagHaveCart}" th:action="@{/cardFood/acceptCart}">
                     <input type="hidden" th:value="'Итоговый заказ : ' + *{messageForReal} + ' со стоимостью : ' + *{messageTotalCost}" name="orderCartText">
@@ -36,7 +51,7 @@
                     <div style="padding-right: 7px; padding-left: 7px; margin-top: 10px;">
                         <form method="post" style="margin-bottom: 7px" th:if="${pastOrder.isDone} == false" th:action="@{/cardFood/cancelCart}">
                             <input type="hidden" th:value="${pastOrder.idPastOrder}" name="idPastOrder">
-                            <button type="submit" style="background-color: #A69180; color: #261414; border-color: #261414; width: 100%" class="btn btn-outline-dark">Отменить заказ</button>
+                            <button type="submit" style="background-color: #dfcdbe; color: #261414; border-color: #261414; width: 100%" class="btn btn-outline-dark">Отменить заказ</button>
                         </form>
                     </div>
                 </div>
@@ -58,15 +73,19 @@
                     <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="'Номер заказа: ' + ${pastOrderForAdmin.pastId}"></span>
                     <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="${pastOrderForAdmin.pastOrderText}"></span>
                     <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="'ID заказчика: ' + ${pastOrderForAdmin.clientId}"></span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:if="${pastOrderForAdmin.isPickup} == true">Самовывоз</span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:if="${pastOrderForAdmin.isPickup} == false">Доставка</span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="'Адрес: ' + ${pastOrderForAdmin.addressOrder}"></span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="'Время получения: ' + ${pastOrderForAdmin.timeOrder}"></span>
                     <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:utext="'Статус заказа: ' + ${pastOrderForAdmin.isDone}"></span>
                     <div style="padding-right: 7px; padding-left: 7px; margin-top: 10px;">
                         <form method="post" style="margin-bottom: 7px" th:action="@{/cardFood/cancelCart}">
                             <input type="hidden" th:value="${pastOrderForAdmin.idPastOrder}" name="idPastOrder">
-                            <button type="submit" style="background-color: #ebd4d4; color: #261414; border-color: #261414; width: 100%" class="btn btn-outline-dark">Отменить заказ</button>
+                            <button type="submit" style="background-color: #dfcdbe; color: #261414; border-color: #261414; width: 100%" class="btn btn-outline-dark">Отменить заказ</button>
                         </form>
                         <form method="post" style="margin-bottom: 7px" th:action="@{/cardFood/confirmCart}">
                             <input type="hidden" th:value="${pastOrderForAdmin.idPastOrder}" name="idPastOrder">
-                            <button class="btn btn-outline-dark" style="background-color: #ebd4d4; color: #261414; border-color: #261414; width: 100%;" type="submit">Подтвердить выполнение заказа</button>
+                            <button class="btn btn-outline-dark" style="background-color: #dfcdbe; color: #261414; border-color: #261414; width: 100%;" type="submit">Подтвердить выполнение заказа</button>
                         </form>
                     </div>
                 </div>

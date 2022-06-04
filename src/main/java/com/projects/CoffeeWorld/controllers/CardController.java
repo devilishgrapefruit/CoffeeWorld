@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cardFood")
@@ -31,6 +28,30 @@ public class CardController {
 
     @Autowired
     private MenuRepository menuRepository;
+
+    @PostMapping("/setParametersOrder")
+    public String setParametersOrder(@AuthenticationPrincipal User user,
+                                  @RequestParam String addressOrder,
+                                  @RequestParam String timeOrder,
+                                  @RequestParam (required = false) boolean pickup) {
+        if (realOrderRepository.findRealOrderByClientId(user.getId()) != null) {
+            RealOrder realOrder = realOrderRepository.findRealOrderByClientId(user.getId());
+            realOrder.setAddressOrder(addressOrder);
+            realOrder.setTimeOrder(timeOrder);
+            realOrder.setPickup(pickup);
+            realOrderRepository.save(realOrder);
+        }
+        else {
+            RealOrder realOrder = new RealOrder();
+            realOrder.setClientId(user.getId());
+            realOrder.setAddressOrder(addressOrder);
+            realOrder.setTimeOrder(timeOrder);
+            realOrder.setPickup(pickup);
+            realOrderRepository.save(realOrder);
+        }
+            return "redirect:/cardFood";
+        }
+
 
     @GetMapping
     public String getCardFood(
@@ -62,17 +83,42 @@ public class CardController {
                 model.addAttribute("messageForReal", messageForReal);
                 model.addAttribute("messageTotalCost", totalCostText);
                 model.addAttribute("flagHaveCart", haveCart);
+                if (realOrder.getAddressOrder() == null) {
+                    model.addAttribute("pickup", "Пожалуйста, выберите способ получения");
+                    model.addAttribute("address", "Укажите адрес");
+                    model.addAttribute("time", "Укажите желаемое время получения");
+                }
+                else {
+                    if (realOrder.isPickup())
+                        model.addAttribute("pickup", "Самовывоз");
+                    else
+                        model.addAttribute("pickup", "Доставка");
+                    model.addAttribute("address", realOrder.getAddressOrder());
+                    if (realOrder.getTimeOrder() != null)
+                        model.addAttribute("time", realOrder.getTimeOrder());
+                    else
+                        model.addAttribute("address", "Ближайшее время");
+                }
+
+
             } else {
                 messageForReal = "Вы ничего не заказывали";
                 totalCost = 0;
                 model.addAttribute("messageForReal", messageForReal);
                 model.addAttribute("messageTotalCost", totalCostText);
+                model.addAttribute("pickup", "Пожалуйста, выберите способ получения");
+                model.addAttribute("address", "Укажите адрес");
+                model.addAttribute("time", "Укажите желаемое время получения");
+
             }
         } else {
             messageForReal = "Вы ничего не заказывали";
             totalCost = 0;
             model.addAttribute("messageForReal", messageForReal);
             model.addAttribute("messageTotalCost", totalCostText);
+            model.addAttribute("pickup", "Пожалуйста, выберите способ получения");
+            model.addAttribute("address", "Укажите адрес");
+            model.addAttribute("time", "Укажите желаемое время получения");
         }
 
         PastOrder pastOrder = new PastOrder();
@@ -113,6 +159,9 @@ public class CardController {
         pastOrder.setPastId(realOrder.getIdOrder());
         pastOrder.setPastOrderText(orderCartText);
         pastOrder.setClientId(user.getId());
+        pastOrder.setPickup(realOrder.isPickup());
+        pastOrder.setAddressOrder(realOrder.getAddressOrder());
+        pastOrder.setTimeOrder(realOrder.getTimeOrder());
         pastOrder.setDone(false);
         pastOrderRepository.save(pastOrder);
         return "redirect:/cardFood";

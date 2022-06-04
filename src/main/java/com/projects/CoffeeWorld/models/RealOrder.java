@@ -14,6 +14,8 @@ public class RealOrder {
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<Long, Integer> orderMeal;
     private Long clientId;
+    private String addressOrder;
+    private String timeOrder;
+    private boolean pickup;
     private boolean isDone;
-
 }

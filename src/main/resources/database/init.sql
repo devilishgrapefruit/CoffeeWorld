@@ -27,6 +27,9 @@ create table if not exists menu (
 create table if not exists past_order (
     id_past_order int8 not null,
     client_id int8,
+    pickup boolean,
+    address_order varchar(255),
+    time_order varchar(255),
     is_done boolean,
     past_order_text varchar(255),
     date varchar(255),
@@ -44,6 +47,9 @@ create table if not exists past_order_order_meal (
 create table if not exists real_order (
     id_order int8 not null,
     client_id int8,
+    pickup boolean,
+    address_order varchar(255),
+    time_order varchar(255),
     is_done boolean,
     primary key (id_order)
 );
