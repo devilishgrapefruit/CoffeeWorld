@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Login fragments</title>
+</head>
+<body>
+
+<div class="login__window"  th:fragment="login__fr">
+  <div style="color: #1a150a; font-weight: 800" th:if="${param.error}">
+    Invalid username or password.
+  </div>
+  <div style="color: #1a150a; font-weight: 800" th:if="${param.logout}">
+    You have been logged out.
+  </div>
+  <div th:if="${messageOfLogin}">
+    <div class="my-1">
+      <span style="color: #1a150a; font-weight: 800" th:utext="${messageOfLogin}"></span>
+    </div>
+  </div>
+  <form th:action="@{/login}" method="post">
+    <div class="mb-3">
+      <label for="usern" class="form-label"> Username: </label>
+      <input type="text" id="usern" class="form-control" name="username"/>
+    </div>
+    <div class="mb-3">
+      <label for="passw"> Password: </label>
+      <input type="password" class="form-control" id="passw" name="password"/>
+    </div>
+    <div><input type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" value="Войти"/></div>
+  </form>
+</div>
+
+</body>
+</html>

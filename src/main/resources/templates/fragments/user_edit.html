@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User fragments</title>
+</head>
+<body>
+<div class="user__edit__fr" th:fragment="user__edit">
+    <form th:action="@{'/user/' + ${user.id}}" method="post">
+        <div class="mb-3 user__edit__input">
+            <label for="username">Username : </label>
+            <input type="text" class="form-control" name="username" id="username" th:value="*{user.username}">
+        </div>
+        <input type="hidden" th:value="*{user.id}" name="userId">
+        <div  class="mb-3 user__edit__input" th:each="role : ${roles}">
+            <label th:for="${role}" th:text="${role}"></label>
+            <input type="checkbox" th:checked="${#lists.contains(user.roles, role)}" th:name="${role}">
+        </div>
+        <button class="btn btn-outline-dark" style="background-color: #D9CBBF; color: #261414; border-color: #261414" type="submit">Сохранить пользователя</button>
+    </form>
+</div>
+
+<div class="user__edit__fr" th:fragment="user__edit2">
+    <form th:action="@{/user/profile}" method="post">
+        <div class="mb-3">
+            <label for="username1">Username : </label>
+            <input type="text" class="form-control" name="username" id="username1" th:value="*{user.username}">
+        </div>
+        <input type="hidden" th:value="*{user.id}" name="userId">
+        <div class="mb-3">
+            <label for="newPass">Новый пароль: </label>
+            <input type="password" class="form-control" name="newPassword" id="newPass" placeholder="Введите новый пароль">
+        </div>
+        <div class="mb-3">
+            <label for="oldPass">Старый пароль: </label>
+            <input type="password" class="form-control" required="true" name="oldPassword" id="oldPass" placeholder="Введите старый пароль для проверки пароль">
+        </div>
+        <button style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="mt-1 md-1 insert__form__button" type="submit">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

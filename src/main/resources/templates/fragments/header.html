@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<header class="row m-0 align-items-center justify-content-center mb-3 w-100 p-2" style="margin-left: 0; background-color: #4b392f; color: #fffefd; height: 60px;" th:fragment="header_fr">
+    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><img src="https://i.pinimg.com/originals/23/bd/26/23bd26dcbbb36c433553a25d10608433.png" style="width: 35px; height: 35px;">
+        <a class="align-items-center justify-content-center" style="text-decoration: none; color: #ffffff;" th:href="@{/}">Coffee World</a></div>
+    <div class="col text-center" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; color: #D9CBBF;"  th:if="${#httpServletRequest.remoteUser}">
+        <a style="text-decoration: none; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" th:href="@{/user/profile}" >Профиль</a>
+    </div>
+    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" sec:authorize ="hasAuthority('ADMIN')" style="text-decoration: none; color: #ffffff;" th:href="@{/user}">Пользователи</a></div>
+    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" style="text-decoration: none; color: #ffffff;" th:href="@{/menu}">Меню</a></div>
+    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" style="text-decoration: none; color: #ffffff;" th:href="@{/cardFood}">Корзина</a></div>
+    <th:block th:if="!${#httpServletRequest.remoteUser}">
+        <div class="col align-items-center text-center justify-content-center">
+            <a class="align-items-center text-center justify-content-center" style="text-decoration: none; color: #ffffff; border-radius: 5px; border-color: #ffffff; background: transparent;" th:text="Авторизироваться" th:href="@{/login}"></a>
+        </div>
+    </th:block>
+    <th:block th:if="${#httpServletRequest.remoteUser}">
+        <div th:replace="~{fragments/logout :: logout_fr}"></div>
+    </th:block>
+</header>
+
+</body>
+</html>

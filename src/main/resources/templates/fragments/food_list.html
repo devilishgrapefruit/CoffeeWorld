@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title> Food list</title>
+</head>
+<body>
+
+<div class="food__list" th:fragment="food__list">
+    <div style="font-weight: 800; font-size: 25px; color: #261414" class="food__list__header mt-3 md-1">Список блюд</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <th:block th:each="food : ${foods}">
+            <div class="col">
+                <div class="card my-2" style="background-color: #4b392f; color: #ffffff">
+                <span class="card-text food__info" style="white-space: nowrap; margin-left: 7px; margin-right: 7px; overflow: hidden; text-overflow: ellipsis;" th:utext="'Тип: ' + ${food.typeFood}"></span>
+                    <div th:if="${food.filename}">
+                        <img class="card-img-top"  th:src="@{/img/{filename}(filename = ${food.filename})}">
+                    </div>
+
+<!--                    <span sec:authorize ="hasAuthority('ADMIN')" style="margin-left: 7px; margin-right: 7px;" class="card-text food__info" th:utext="${food.idFood}"></span>-->
+                    <span class="card-text food__info" style=" white-space: nowrap; margin-left: 7px; margin-right: 7px; overflow: hidden; text-overflow: ellipsis;" th:utext="${food.nameFood}"></span>
+                    <span class="card-text food__info" style=" white-space: nowrap; margin-left: 7px; margin-right: 7px; overflow: hidden; text-overflow: ellipsis;" th:utext="'Цена: ' + ${food.costFood} + ' руб.'"></span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:if="${food.isHave} == true">В наличии</span>
+                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" th:if="${food.isHave} == false">Нет в наличии</span>
+<!--                    <span class="card-text food__info" style="margin-left: 7px; margin-right: 7px;" sec:authorize ="hasAuthority('ADMIN')" th:utext="${food.getAuthorName()}"></span>-->
+                    <div style="padding-right: 7px; padding-left: 7px; margin-top: 10px;">
+                        <form method="post" style="margin-bottom: 7px" th:action="@{'/menu/addToCart/' + ${food.idFood}}">
+                            <input type="hidden" th:value="*{food.idFood}" name="foodId">
+                            <button class="btn btn-outline-dark" style="background-color: #ebd4d4; color: #261414; border-color: #261414; width: 100%;" type="submit">В заказ</button>
+                        </form>
+                        <form sec:authorize ="hasAuthority('ADMIN')" method="post" style="margin-bottom: 7px" th:action="@{'/menu/delete/' + ${food.idFood}}">
+                            <input type="hidden" th:value="*{food.idFood}" name="foodId">
+                            <button type="submit" style="background-color: #ebd4d4; color: #261414; border-color: #261414; width: 100%" class="btn btn-outline-dark">Удалить из Меню</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+</body>
+</html>

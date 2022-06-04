@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Food filter</title>
+</head>
+<body>
+
+<div class="food__filter" th:fragment="food__filter">
+  <div style="font-weight: 800" class="food__filter__label">Найти по типу</div>
+  <form method="get" class="food__filter__form" th:action="@{/menu}">
+    <input type="text" name="filterTag" class="form-control mb-2 filter__form__input" th:value="${filterType}">
+    <button type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="filter__form__button">Найти</button>
+  </form>
+  <div th:if="${filterError}" class="food__filter__error">
+    <span th:utext="${filterError}"></span>
+  </div>
+</div>
+
+</body>
+</html>

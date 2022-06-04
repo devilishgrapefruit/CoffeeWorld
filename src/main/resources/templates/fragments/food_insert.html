@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Food insert</title>
+</head>
+<body>
+
+<div sec:authorize ="hasAuthority('ADMIN')" class="food__insert" th:fragment="food__insert">
+    <div style="font-weight: 800" class="food__insert__label">Добавить блюдо</div>
+    <div id="collapseExample" class="form-group">
+        <form method="post"  class="pt-2 pd-2" th:action="@{/menu}" enctype="multipart/form-data">
+            <input type="text" class="form-control mt-1 md-1" required="true" name="nameFood" placeholder="Укажите название блюда">
+            <input type="number" class="form-control mt-1 md-1" required="true" step="0.01" name="costFood" placeholder="Укажите стоимость блюда">
+            <input type="text" class="form-control mt-1 md-1" name="typeFood" required="true" placeholder="Укажите тип блюда">
+            <input type="file" name="file" class="form-control mt-1 md-1">
+            <div class="mt-1 mb-1">
+                <input type="checkbox" id="isHave" name="isHave" class="form-check-input insert__form__input">
+                <label for="isHave" class="form-check-label">Есть в наличии</label>
+            </div>
+            <button type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="mt-1 md-1 insert__form__button">Добавить</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

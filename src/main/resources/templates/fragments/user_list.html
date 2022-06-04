@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List fragments</title>
+</head>
+<body>
+<div class="user__edit__list" th:fragment="user__list">
+    <table style="">
+        <thead>
+        <tr>
+            <th><b>Name</b></th>
+            <th><b>Role</b></th>
+            <th><b>Ссылка на редактирование</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:utext="${user.username}" style="padding: 7px;">
+                <td th:utext="${user.roles}" style="padding: 7px;">
+                <td style="padding: 7px;"><a th:href="'/user/' + ${user.id}">Edit User</a></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

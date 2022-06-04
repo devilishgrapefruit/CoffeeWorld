@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration fragments</title>
+</head>
+<body>
+
+<div class="registration__window" th:fragment="registration_fr">
+    <div class="registration-error" th:if="${message}">
+        <span  style="color: #D9CBBF; font-weight: 800" class="error-message" th:utext="${message}"></span>
+    </div>
+    <form th:action="@{/registration}" method="post">
+        <div class="mb-3">
+            <label for="usern" class="form-label"> Username:</label>
+            <input type="text" id="usern" class="form-control" name="username" aria-describedby="emailHelp"/>
+            <div id="emailHelp" style="color: #261414" class="form-text">Username должен быть уникальным!</div>
+        </div>
+        <div class="mb-3">
+            <label for="ema" class="form-label"> Email: </label>
+            <input type="email" id="ema" class="form-control" name="email"/>
+        </div>
+        <div class="mb-3">
+            <label for="passw" class="form-label"> Password: </label>
+            <input type="password" id="passw" class="form-control" name="password"/>
+        </div>
+        <div class="my-3">
+            <div class="g-recaptcha" data-sitekey="6LdcM2UdAAAAAPeCXivk8hMelsF7L9uu6x9g6EPP"></div>
+        </div>
+        <div><input type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="mt-1 md-1 insert__form__button" value="Зарегистрироваться"/></div>
+    </form>
+</div>
+
+</body>
+</html>

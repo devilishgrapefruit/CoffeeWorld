@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sorry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<h1 style="margin-left: 30px">Извините, эта страница доступна только администраторам</h1>
+<div style = "margin-left: 30px">
+    <div style = " border-color: #261414; border: 4px; border-radius: 5px; background-color: #ebd4d4; padding: .3em 1.5em; width: 300px; margin-bottom: 10px; border-color: #261414; text-align: center; font-size: 30px;"><a class="align-items-center justify-content-center" style="text-decoration: none; color: #261414" th:href="@{/menu}">Меню</a></div>
+    <img src="https://i.pinimg.com/originals/e8/8f/30/e88f3028afe762960b7a2c11837b34d1.jpg" style="width: 300px; height: 300px;">
+</div>
+</body>
+</html>
