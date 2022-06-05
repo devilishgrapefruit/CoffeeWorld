@@ -46,7 +46,6 @@ public class OrderController {
             }
             if (filtredMenus.isEmpty()) {
                 filtredMenus = menus;
-                System.out.println("Food with " + filterType + " didn't found");
                 model.addAttribute("filterError", "Food with " + filterType + " didn't found");
                 filterType = "";
             }
@@ -54,7 +53,7 @@ public class OrderController {
             System.out.println("Filtred menus is + " + filtredMenus.toString());
         }
         model.addAttribute("filterTag", filterType);
-        model.addAttribute("foods",menus);
+        model.addAttribute("foods", menus);
         return "home";
     }
 

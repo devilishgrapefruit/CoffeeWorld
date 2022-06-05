@@ -9,7 +9,7 @@
 <div class="food__filter" th:fragment="food__filter">
   <div style="font-weight: 800" class="food__filter__label">Найти по типу</div>
   <form method="get" class="food__filter__form" th:action="@{/menu}">
-    <input type="text" name="filterTag" class="form-control mb-2 filter__form__input" th:value="${filterType}">
+    <input type="text" name="filterType" class="form-control mb-2 filter__form__input" th:value="${filterType}">
     <button type="submit" style="background-color: #ebd4d4; padding: .3em 1.5em; border-color: #261414; border: 4px; border-radius: 5px;" class="filter__form__button">Найти</button>
   </form>
   <div th:if="${filterError}" class="food__filter__error">
