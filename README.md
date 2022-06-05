@@ -34,7 +34,7 @@ createdb coffeeworld
 Также редактируем data.path: .../.../CoffeeWorld/src/main/resources/images (вместо точек указываем свой путь)
 После этих шагов можем убедиться, что приложение работает корректно, перейдем в папку CoffeeWorld и введем в терминале:
 ```groovy
--jar target/CoffeeWorld-0.0.1-SNAPSHOT.jar
+ -jar target/CoffeeWorld-0.0.1-SNAPSHOT.jar
 ```
 Для остановки работы приложения: Ctrl+ C
 
