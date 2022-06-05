@@ -28,10 +28,10 @@ createdb coffeeworld
 ```
 ___
 <br>
-Затем нужно подредактировать файл application.properties, путь: CoffeeWorld/src/main/resources
-Меняем spring.datasource.password и spring.datasource.username на свой логин и пароль от postgreSQL.
-Вместо YOUR_MAIL пишем свою почту и вместо YOUR_PASSWORD - пароль от почты.
-Также редактируем data.path: .../.../CoffeeWorld/src/main/resources/images (вместо точек указываем свой путь)
+<p>Затем нужно подредактировать файл application.properties, путь: CoffeeWorld/src/main/resources  </p>
+<p>Меняем spring.datasource.password и spring.datasource.username на свой логин и пароль от postgreSQL </p>
+<p>Вместо YOUR_MAIL пишем свою почту и вместо YOUR_PASSWORD - пароль от почты. </p>
+<p>Также редактируем data.path: .../.../CoffeeWorld/src/main/resources/images (вместо точек указываем свой путь) </p> 
 После этих шагов можем убедиться, что приложение работает корректно, перейдем в папку CoffeeWorld и введем в терминале:
 
 > java -jar target/CoffeeWorld-0.0.1-SNAPSHOT.jar
