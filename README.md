@@ -22,5 +22,19 @@
 ### Как запустить проект
 Для запуска проекта понадобится JAVA с с версией 11 и выше, а также сборщик проектов Maven. 
 Кроме этого, требуется установка система управления базами данных postgres.
-Из файла pom.xml необходимо перенести используемые зависимости. После этого вы сможете запустить проект c помощью любой среды разработки. 
-Для этого необходимо запустить файл CoffeeWorldApplication.
+Для начала необходимо создать базу данных - coffeeworld.
+В терминале напишем:
+```groovy
+createdb coffeeworld
+```
+<br>
+Затем нужно подредактировать файл application.properties, путь: CoffeeWorld/src/main/resources
+Меняем spring.datasource.password и spring.datasource.username на свой логин и пароль от postgreSQL.
+Вместо YOUR_MAIL пишем свою почту и вместо YOUR_PASSWORD - пароль от почты.
+Также редактируем data.path: .../.../CoffeeWorld/src/main/resources/images (вместо точек указываем свой путь)
+После этих шагов можем убедиться, что приложение работает корректно, перейдем в папку CoffeeWorld и введем в терминале:
+```groovy
+-jar target/CoffeeWorld-0.0.1-SNAPSHOT.jar
+```
+Для остановки работы приложения: Ctrl+ C
+
