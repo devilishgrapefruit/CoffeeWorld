@@ -36,4 +36,6 @@ ___
 
 > java -jar target/CoffeeWorld-0.0.1-SNAPSHOT.jar
 
-Для остановки работы приложения: Ctrl + C
+Для остановки работы приложения зажмите: Ctrl + C
+
+
