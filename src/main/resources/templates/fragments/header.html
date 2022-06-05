@@ -13,7 +13,7 @@
     <div class="col text-center" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; color: #D9CBBF;"  th:if="${#httpServletRequest.remoteUser}">
         <a style="text-decoration: none; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" th:href="@{/user/profile}" >Профиль</a>
     </div>
-    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" sec:authorize ="hasAuthority('ADMIN')" style="text-decoration: none; color: #ffffff;" th:href="@{/user}">Пользователи</a></div>
+    <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center"  style="text-decoration: none; color: #ffffff;" th:href="@{/user}">Пользователи</a></div>
     <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" style="text-decoration: none; color: #ffffff;" th:href="@{/menu}">Меню</a></div>
     <div style="text-decoration: none; color: #ffffff;" class="col text-center align-items-center justify-content-center"><a class="align-items-center justify-content-center" style="text-decoration: none; color: #ffffff;" th:href="@{/cardFood}">Корзина</a></div>
     <th:block th:if="!${#httpServletRequest.remoteUser}">
